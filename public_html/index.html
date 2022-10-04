@@ -2,24 +2,100 @@
 <html>
 <head>
 <title>Meu primeiro HTML</title>
+
+
+<style>
+.minhancora {
+    color:red;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    padding: 20px;
+    text-decoration: none;
+    margin: 20px;
+    width: 2;
+}
+
+.minhancora:hover {
+    background-color: red;
+    color: white;
+}
+
+table {
+  width: 100%;  
+  border-collapse: collapse;
+
+}
+td {
+	padding: -10px;
+	height: 40px;	
+	vertical-align: bottom;
+}
+th, td{
+	border-bottom: 1px solid #999;
+	}
+tr:nth-child(odd) {
+	background-color: #e2e2e2;
+	}
+th {
+  background-color: #04AA6D;
+  color: white;
+}	
+
+.ressalta:hover {
+	background-color: coral;
+	}
+
+#caixa {
+	border: 5px solid;
+	padding: 20px;	
+	width: 80%;
+}
+</style>
+
+
+
 </head>
 <body>
-<h1 style="text-align:center;">Cabeçalho 1</h1>
-<h2>Cabe&ccedil;alh&atilde;o 2</h2>
-<h3>Cabeçalho 3</h3>
-<hr>
+<h1 style="text-align:center;">Meu exemplo</h1>
 <a href='http://www.epm.br' target='janela'>
 <img src='https://sp.unifesp.br/epm/images/repositorio/logo/brasao2_epm_74x85.png'
      alt='Logo da EPM'>
 </a>
 
+<div id=caixa>
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Savings</th>
+  </tr>
+  <tr class="ressalta">
+    <td>Peter</td>
+    <td>Griffin</td>
+    <td>$100</td>
+  </tr>
+  <tr  class="ressalta">
+    <td>Lois</td>
+    <td>Griffin</td>
+    <td>$150</td>
+  </tr>
+  <tr class="ressalta">
+    <td>Joe</td>
+    <td>Swanson</td>
+    <td>$300</td>
+  </tr>
+  <tr class="ressalta">
+    <td>Cleveland</td>
+    <td>Brown</td>
+    <td>$250</td>
+  </tr>
+</table>
+</div>
 
-     
-<p>Aqui é meu <i>parágrafo</i> <br><mark>principal</mark> <br><ins>principal</ins></p>
-<p>Aqui eu quero outra linha</p>
-
-<a href='http://www.unifesp.br' target='_blank'>Site Unifesp</a>
-<a href='http://www.epm.br' target='_blank'>Site EPM</a>
+<p>&nbsp;</p>
+<a class="minhancora" href='http://www.unifesp.br' target='_blank'>Site Unifesp</a>
+<a class="minhancora" href='http://www.epm.br' target='_blank'>Site EPM</a>
 
 
 
