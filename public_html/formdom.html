@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+<script>
+function validateForm() {
+  let x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+}
+
+function validaIdade() {
+  let ele = document.forms["myForm"]["fidade"];
+
+	
+  if( ele.value > 18 && ele.value < 75 ) {
+	  alert("Idade OK");
+	 }
+  else {
+	  ele.style.visibility= 'hidden';
+	  document.getElementById("labid").innerHTML = 
+		  "Para menores de idade, informe nome da mãe <input type='text' name='fmae'> ";
+  }
+}
+
+</script>
+</head>
+<body>
+
+<h2>JavaScript Validation</h2>
+
+<form name="myForm" action="/action_page.php" method="post">
+  Nome: <input type="text" name="fname" 
+          onfocusout="validateForm()"><br>
+	  <span id="labid">Idade:</span> 
+	  <input type="text" name="fidade" 
+          onfocusout="validaIdade()">
+
+</form>
+
+</body>
+</html>
+
