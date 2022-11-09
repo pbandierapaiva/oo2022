@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS</title>
+<title>Exemplo de página usando JQuery</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -10,9 +10,9 @@ $(document).ready(function(){
     $("#busca").click( function() {
         $("#iBusca").show()
         });
-    $('#iBusca').keypress( function(evt){
-        if( evt.code == 'Enter' ) {
-            alert("Realiza busca: " + $(this).val())
+    $("#iBusca").keyup( function(evt){
+        if( evt.code == "Enter" ) {
+            alert("Realizando busca: " + $(this).val())
         }
     })
 })

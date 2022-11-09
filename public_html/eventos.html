@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+
+
+function grudaevento(){
+	document.body.addEventListener("beforeunload", confirma)
+}
+
+
+function confirma() {
+//	alert("Vai descarregar a página")
+	return "Vai descarregar a página"
+}
+
+function myFunction(evento) {
+  navigator.geolocation.getCurrentPosition(mostraPosicao);
+}
+
+function mostraPosicao(position) {
+	local = document.getElementById("posicao")
+    local.innerHTML =
+  			"Latitude: " + position.coords.latitude +
+  			"Longitude: " + position.coords.longitude;
+}
+</script>
+
+</head>
+
+
+<body onload="grudaevento">
+
+<p>A function is triggered when the user is pressing a key in the input field.</p>
+
+<span id="meuInput" type="text">Clique aqui</span>
+<p id="posicao">Sem localização</p>
+<a href="https://www.w3schools.com">Click here to go to w3schools.com</a>
+
+</body>
+</html>
+
