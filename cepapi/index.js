@@ -43,7 +43,7 @@ app.get('/cep/:numero', (req, res) => {
 			logra["CEP"] = partes[0]
 			logra["Cidade"] = partes[1]
 			logra["Bairro"] = partes[2]
-			logra["Rua"] = partes[3].split(" - ")[0]
+			logra["Rua"] = partes[3]
 			listaend.push( logra )
 		}
 		resultado["STATUS"]="OK"

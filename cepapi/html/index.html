@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS</title>
+<title>Form de registro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
@@ -9,19 +9,19 @@
   <div class="w3-container w3-green">
     <h2>Registro</h2>
   </div>
-  <form class="w3-container" action="/action_page.php">
+  <form class="w3-container">
     <p>      
     <label class="w3-text-green"><b>Nome</b></label>
     <input class="w3-input w3-border w3-sand" name="nome" type="text"></p>
     <p>      
     <label class="w3-text-green"><b>CEP</b></label>
-    <input class="w3-input w3-border w3-sand" id="iCep" name="cep" type="text"></p>
+    <input class="w3-input w3-border w3-sand" style="width:30%" id="iCep" name="cep" type="text"></p>
     <p>
-    <label class="w3-text-green"><b>Rua</b></label>
-    <input class="w3-input w3-border w3-sand" id="iRua" name="rua" type="text"></p>
+    <label class="w3-text-green" style="width:80%" ><b>Rua</b></label>
+    <input class="w3-input w3-border w3-sand" style="width:80%" id="iRua" name="rua" type="text"></p>
     <p>
-    <label class="w3-text-green"><b>Número</b></label>
-    <input class="w3-input w3-border w3-sand" name="num" type="text"></p>
+    <label class="w3-text-green" style="width:20%" ><b>Número</b></label>
+    <input class="w3-input w3-border w3-sand"  style="width:20%" id="iNum" name="num" type="text"></p>
     <p>
     <label class="w3-text-green"><b>Bairro</b></label>
     <input class="w3-input w3-border w3-sand" id="iBairro" name="bairro" type="text"></p>
@@ -31,6 +31,8 @@
     <p>
     <button class="w3-btn w3-green">Registra</button></p>
   </form>
+
+  <!-- Caixa de diálogo MODAL -->
   <div id="selecRua" class="w3-modal">
     <div class="w3-modal-content">
     <header class="w3-container w3-teal">         
@@ -38,10 +40,10 @@
         <h2>Selecione endereço</h2>
     </header> 
     <div class="w3-container">
-        <div class="w3-dropdown-hover">
-            <button class="w3-button w3-black">Selecione...</button>
-            <div id="iSelecRua" class="w3-dropdown-content w3-bar-block w3-border">
-      </div>
+        <ul id="iSelecRua" class="w3-ul w3-hoverable">
+            <!-- <button class="w3-button w3-black">Selecione...</button> -->
+            <!-- <div id="iSelecRua" class="w3-dropdown-content w3-bar-block w3-border"> -->
+            </ul>
     </div>
   </div>
 
