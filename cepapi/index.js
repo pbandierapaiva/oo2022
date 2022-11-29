@@ -5,6 +5,9 @@ const port = 3000
 const { exec } = require('child_process');
 
 
+app.use('/static', express.static('html'))
+
+
 app.get('/', (req, res) => {
   res.send('API para acesso ao CEP')
 })
@@ -13,6 +16,14 @@ app.get('/cep/:numero', (req, res) => {
 
 	let resultado = {"STATUS":"Iniciando..."}
 	
+	if( req.params.numero.length < 5 ) {
+		resultado["STATUS"]="ERRO"
+		resultado["MENSAGEM"]="Busca de CEP requer ao menos 5 algarismos"
+		res.json(resultado)
+		return
+	}
+
+
 	strBusca = `grep ^${req.params.numero}   /home/pub/ceps.txt`
 
 	exec( strBusca, (err, stdout, stderr) => {
