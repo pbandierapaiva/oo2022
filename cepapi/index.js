@@ -12,6 +12,13 @@ app.get('/', (req, res) => {
   res.send('API para acesso ao CEP')
 })
 
+app.get('/cep/', (req, res) => {
+
+	let resultado = {"STATUS":"ERRO"}
+	res.json(resultado)
+	})
+
+
 app.get('/cep/:numero', (req, res) => {
 
 	let resultado = {"STATUS":"Iniciando..."}
