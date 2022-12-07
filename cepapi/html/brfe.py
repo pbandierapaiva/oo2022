@@ -1,6 +1,6 @@
 from browser import document, html, alert, ajax
 import json
-
+ 
 class EntraTexto(html.P):
 	def __init__(self, texto, desabilita=False, idInput=''):
 		html.P.__init__(self)
@@ -33,36 +33,34 @@ class CaixaModal(html.DIV):
 
 
 def buscaCep( ev ):
-    ajax.get("/cep/%s"%ev.currentTarget.value, oncomplete=procCep )
+	ajax.get("/cep/%s"%ev.currentTarget.value, oncomplete=procCep )
 
 def procCep(result):
-    resp = json.loads(result.text)
-    if resp['STATUS'] != "OK":
-        document <= html.P("CEP Não encontrado.")
-        return
-    if len(resp['Dado'])==1:
-        document['iRua'].value = resp['Dado'][0]['Rua']
-        document['iBairro'].value = resp['Dado'][0]['Bairro']
-        document['iCidadeUf'].value = resp['Dado'][0]['Cidade']
+	resp = json.loads(result.text)
+	if resp['STATUS'] != "OK":
+		document <= html.P("CEP Não encontrado.")
+		return
+	if len(resp['Dado'])==1:
+		document['iRua'].value = resp['Dado'][0]['Rua']
+		document['iBairro'].value = resp['Dado'][0]['Bairro']
+		document['iCidadeUf'].value = resp['Dado'][0]['Cidade']
+		return
+
+	selecionaRua = CaixaModal("Selecione a rua", idCaixa='caixaSelecRua')
+	lista = html.UL(Class="w3-ul w3-hoverable")
+	for end in resp['Dado']:
+		it = html.LI( end["Rua"] + " - " +end["Cidade"], value=end["CEP"] )
+		it.bind("click", selecionouCep) 
+		lista <= it
+	selecionaRua.conteudo <= lista
+
+	document <= selecionaRua
 	return
-
-    selecionaRua = CaixaModal("Selecione a rua", idCaixa='caixaSelecRua')
-    lista = html.UL(Class="w3-ul w3-hoverable")
-    for end in resp['Dado']:
-    	it = html.LI( end["Rua"] + " - " +end["Cidade"], value=end["CEP"] )
-    	it.bind("click", selecionouCep) 
-    	lista <= it
-    selecionaRua.conteudo <= lista
-
-    document <= selecionaRua
-    return
     
 def selecionouCep(req):
-    document['caixaSelecRua'].apagaCaixa()
-    document['iCep'].value = req.target.value
-    ajax.get("/cep/%s"%req.target.value, oncomplete=procCep )
-
-
+	document['iCep'].value = "%08d"%req.target.value
+	document['caixaSelecRua'].apagaCaixa()
+	ajax.get("/cep/%08d"%req.target.value, oncomplete=procCep )
 
 fichaCadastro = html.DIV(Class="w3-card-4")
 fichaCadastro <= html.DIV(Class="w3-container w3-green") <= html.H2("Registro")
