@@ -9,7 +9,7 @@ app.use('/static', express.static('html'))
 
 
 app.get('/', (req, res) => {
-  res.send('API para acesso ao CEP')
+  res.redirect(301, "/static/brfe.html");
 })
 
 app.get('/cep/', (req, res) => {
