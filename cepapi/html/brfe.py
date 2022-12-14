@@ -26,11 +26,13 @@ class Alerta(html.DIV):
 
 
 class EntraTexto(html.P):
-	def __init__(self, texto, desabilita=False, idInput=''):
+	def __init__(self, texto, desabilita=False, idInput='', perdeFoco=''):
 		html.P.__init__(self)
 		self.entrada = html.INPUT(Class="w3-input w3-border w3-sand", type="text", id=idInput)
 		self <= html.B( html.LABEL( texto, Class="w3-text-green") )		
 		self <= self.entrada
+		if perdeFoco!='':
+			self.entrada.bind("blur", perdeFoco)
 		if desabilita: self.desabilitaEntrada()
 	def desabilitaEntrada(self):
 		self.entrada.disabled = True
@@ -92,32 +94,70 @@ def selecionouCep(req):
 	document['caixaSelecRua'].apagaCaixa()
 	ajax.get("/cep/%08d"%req.target.value, oncomplete=procCep )
 
-fichaCadastro = html.DIV(Class="w3-card-4")
-fichaCadastro <= html.DIV(Class="w3-container w3-green") <= html.H2("Registro")
+class Ficha(html.DIV):
+	def __init__(self):
+		html.DIV.__init__(self, Class="w3-card-4")
+		self <= html.DIV(Class="w3-container w3-green") <= html.H2("Registro")
+		self.cpoNome = EntraTexto("Nome")
+		self.cpoCep = EntraTexto("CEP", idInput='iCep', perdeFoco=buscaCep)
+		self.cpoRua = EntraTexto("Rua", desabilita=True, idInput='iRua')
+		self.cpoNum = EntraTexto("Número", idInput='iNum')
+		self.cpoBairro = EntraTexto("Bairro", desabilita=True, idInput='iBairro')
+		self.cpoCidUf = EntraTexto("Cidade/UF", desabilita=True, idInput='iCidadeUf')
+		formEntrada = html.FORM(Class="w3-container")
+		formEntrada <= self.cpoNome
+		formEntrada <= self.cpoCep
+		formEntrada <= self.cpoRua
+		formEntrada <= self.cpoNum
+		formEntrada <= self.cpoBairro
+		formEntrada <= self.cpoCidUf
+		self <= formEntrada
 
-cpoNome = EntraTexto("Nome")
-cpoCep = EntraTexto("CEP", idInput='iCep')
-cpoCep.entrada.bind("blur",buscaCep)
-cpoRua = EntraTexto("Rua", desabilita=True, idInput='iRua')
-cpoNum = EntraTexto("Número", idInput='iNum')
-cpoBairro = EntraTexto("Bairro", desabilita=True, idInput='iBairro')
-cpoCidUf = EntraTexto("Cidade/UF", desabilita=True, idInput='iCidadeUf')
+class Menu(html.DIV):
+	def __init__(self, fundo):
+		html.DIV.__init__(self, Class="w3-bar w3-border w3-light-grey")
+		dropdown = html.DIV(Class="w3-dropdown-hover")
+		dropdown <= html.BUTTON("Cadastro", Class="w3-button")
+		opcoes = html.DIV(Class="w3-dropdown-content w3-bar-block w3-card-4")
+		cad = html.A("Incluir", Class="w3-bar-item w3-button" )
+		cad.bind("click", self.cadastra)
+		consulta = html.A("Pesquisar", Class="w3-bar-item w3-button" )
+		opcoes  <= cad
+		opcoes  <= consulta
 
-formEntrada = html.FORM(Class="w3-container")
-formEntrada <= cpoNome
-formEntrada <= cpoCep
-formEntrada <= cpoRua
-formEntrada <= cpoNum
-formEntrada <= cpoBairro
-formEntrada <= cpoCidUf
+		sobre = html.A("Sobre", Class="w3-bar-item w3-button w3-right" )
+		sobre.bind("click", self.mostraSobre)
+		dropdown <= opcoes
+		self <= dropdown
+		self <= sobre
+		self.area = fundo
+	def cadastra(self, ev):
+		self.area.exibe( Ficha() )
+	def mostraSobre(self, ev):
+		self.area.exibe( Sobre() )
 
-fichaCadastro <= formEntrada
-document <= fichaCadastro
+class Sobre(html.DIV):
+	def __init__(self):
+		html.DIV.__init__(self, Class="w3-card-4")
+		self<=html.HEADER(Class="w3-container w3-blue")<=html.H1("Sobre")
+		self<=html.DIV(Class="w3-container") <= html.P("Aplicação para demo de cadastro usando Brython")
+
+class Principal(html.DIV):
+	def __init__(self):
+		html.DIV.__init__(self, Class="w3-container")
+	def exibe(self, obj):
+		self.innerHTML=''
+		self <= obj
+	
+		
+principal = Principal()				
+document <= Menu(principal)
+document <= principal
 
 
-entraCep = html.INPUT(id="iEntraCep")
-entraCep.bind("blur", buscaCep)
 
-document <= entraCep
+#Ficha()
+
+
 
 

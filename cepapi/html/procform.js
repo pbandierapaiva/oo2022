@@ -17,6 +17,9 @@ document.getElementById("formContainer").appendChild(pNome)
 
 
 document.getElementById("iCep").addEventListener("blur", buscaCEP);
+// $("#iCep")
+// document["iCep"]
+
 
 function buscaCEP() {    
     document.getElementById("iCep").className = "w3-input w3-border w3-sand"
